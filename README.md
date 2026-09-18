@@ -4,7 +4,11 @@ A small Windows desktop app for combining two images through direct manipulation
 Built in C# with WPF and .NET 10. No third-party runtime packages, image uploads,
 accounts, or network requests by the app.
 
-## Get the Windows app through GitHub Actions
+## Get the Windows app
+
+Download **Fuse-Windows-x64.zip** from the [latest release](https://github.com/EricSpeidel/fuse-img/releases/latest), extract it, and open **Fuse.exe**. Every push to `main` publishes a release for the pushed commit after the build and both check suites pass. Releases use a unique `build-<commit SHA>` tag; rerunning a successful workflow keeps its existing release.
+
+To download development builds through GitHub Actions:
 
 1. Create a GitHub repository and put **the contents of this folder** at its root.
    Include the hidden `.github` folder, `global.json`, and `Directory.Build.props`.
@@ -16,8 +20,8 @@ accounts, or network requests by the app.
 The download is self-contained: the target computer does not need a .NET runtime
 or developer tools. It targets Windows x64 (Windows 10/11), and is unsigned.
 GitHub Actions artifacts require a signed-in GitHub account to download and are
-retained for 30 days. This workflow builds and packages the app; it does not
-publish a GitHub Release or deploy anything.
+retained for 30 days. Pushes to `main` also publish the tested app as a GitHub Release.
+Pull requests, other branches, and manual runs build and test without publishing releases.
 
 If using Git from this folder:
 
