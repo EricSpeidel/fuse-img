@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="src/">
+    <Project Path="src/Fuse.Core/Fuse.Core.csproj" />
+    <Project Path="src/Fuse.App/Fuse.App.csproj" />
+  </Folder>
+  <Folder Name="tests/">
+    <Project Path="tests/Fuse.Checks/Fuse.Checks.csproj" />
+    <Project Path="tests/Fuse.WindowsChecks/Fuse.WindowsChecks.csproj" />
+  </Folder>
+</Solution>

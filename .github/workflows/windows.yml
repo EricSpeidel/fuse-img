@@ -1,0 +1,43 @@
+name: Build Windows app
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Check blend math and transparency
+        run: dotnet run --project tests/Fuse.Checks -c Release
+      - name: Check Windows rendering and export
+        run: dotnet run --project tests/Fuse.WindowsChecks -c Release
+      - name: Publish self-contained Windows x64 app
+        run: >-
+          dotnet publish src/Fuse.App/Fuse.App.csproj -c Release -r win-x64
+          --self-contained true -p:PublishSingleFile=true
+          -p:IncludeNativeLibrariesForSelfExtract=true -p:DebugType=None
+          -p:DebugSymbols=false -o artifacts/Fuse-win-x64
+      - name: Include quick-start instructions
+        shell: pwsh
+        run: Copy-Item README.md artifacts/Fuse-win-x64/README.md
+      - name: Upload Windows download
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fuse-Windows-x64
+          path: artifacts/Fuse-win-x64/
+          if-no-files-found: error
+          retention-days: 30
+      - name: Upload UI smoke image
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fuse-UI-smoke
+          path: artifacts/ui-smoke.png
+          if-no-files-found: ignore

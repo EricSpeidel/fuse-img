@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType><TargetFramework>net10.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF><EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <AssemblyName>Fuse</AssemblyName><RootNamespace>Fuse.App</RootNamespace>
+    <Version>1.0.0</Version><Description>A small, direct-manipulation image composer.</Description>
+  </PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Fuse.Core/Fuse.Core.csproj" /></ItemGroup>
+</Project>
